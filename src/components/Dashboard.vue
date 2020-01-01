@@ -10,7 +10,7 @@
             <p>{{this.imageName}}</p>
 
 
-            <v-btn v-if="imageSelected" @click="onUpload" >Upload</v-btn>
+            <v-btn v-if="imageSelected" @click="onUpload" >Upload       {{this.percentage}}</v-btn>
             <br>
             <br>
             <div v-if="showAnimation" id="app" style="display: flex">
@@ -88,6 +88,7 @@ import {HalfCircleSpinner} from 'epic-spinners'
                 imageName:"",
                 description:"",
                 imageLink:"",
+                percentage:"",
                 imageSelected:false,
                 showDescription:false,
                 showAnimation: false,
@@ -121,7 +122,7 @@ import {HalfCircleSpinner} from 'epic-spinners'
                 await   axios.post(url,fd,{ headers: { Authorization: `Client-ID ${ClientID}`} ,onUploadProgress: uploadEvent =>{
                     this.showAnimation = true;
                     console.log("Upload progress: " +  Math.round(uploadEvent.loaded / uploadEvent.total * 100) + "%" );
-
+                    this.percentage = Math.round(uploadEvent.loaded / uploadEvent.total * 100) + "%";
                     }})
                 .then(res =>{
                     this.showAnimation = false;
@@ -137,16 +138,17 @@ import {HalfCircleSpinner} from 'epic-spinners'
             },
             newPost(){
 
-                const url = "http://localhost:3000/api/inserePost";
+                const url = "http://localhost:3000/api/inserePostWithUser";
                 var dados = {
                     postimage : this.imageLink,
-                    description: this.description
+                    description: this.description,
+                    IDuser: sessionStorage.getItem("IDuser")
                 };
                 axios.post(url,dados
                 ).then(response=>{
                     console.log("Post insirido BD");
                     console.log(response);
-                    this.$router.push("/home");
+                    this.$router.push("/posts");
                 }).catch(error=>{
                     console.log("Erro insirir BD: " + error);
                 })

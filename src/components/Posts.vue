@@ -2,8 +2,8 @@
     <div>
         <div v-for="post in this.posts" class="posts">
             <v-card
-                    max-width="700"
-                    max-height="700"
+                    max-width="800"
+                    max-height="1000"
                     class="mx-auto"
             >
                 <v-list-item>
@@ -18,7 +18,7 @@
                 </v-list-item>
                 <v-img
                         class="white--text align-end"
-                        max-width="700"
+                        max-width="800"
                         :src="post.postimage"
                 >
                     <v-card-title>{{post.description}}</v-card-title>
@@ -115,6 +115,7 @@
 
                         // Se user não tem imagem vai ser colocada uma default
                         var i = 0;
+                        console.log("Nº posts: " + this.posts.length);
                         for (i = 0; i < this.posts.length; i++) {
                            if(this.posts.userimage === null || this.posts.userimage === "" || this.posts.userimage === undefined ){
                                this.posts[i].userimage = "https://i.imgur.com/23kxlWn.png";
