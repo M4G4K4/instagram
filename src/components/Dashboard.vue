@@ -2,10 +2,8 @@
 
     <div class="main" >
         <h1>New Post</h1>
-
         <br>
         <br>
-
         <div class="upload">
             <input style="display: none" type="file" @change="onFileSelected" ref="fileInput" >
             <v-btn @click="$refs.fileInput.click()">Pick a File</v-btn>
@@ -43,10 +41,36 @@
 
         </div>
 
+        <v-app>
+            <v-app-bar
+                    app
+                    color="primary"
+                    dark
+            >
+                <router-link to="/posts">
+                    <v-avatar :tile="true">
+                        <img src="https://image.flaticon.com/icons/png/512/87/87390.png" alt="logo">
+                    </v-avatar>
+                </router-link>
 
+                <v-spacer/>
+
+                <router-link to="/perfil">
+                    <v-btn class="ma-2" title outlined color="white" >
+                        <v-icon left >mdi-settings</v-icon>Perfil
+                    </v-btn>
+                </router-link>
+
+                <router-link to="/posts">
+                    <v-btn class="ma-2" title outlined color="white" @click.prevent="logout()">
+                        <v-icon left >mdi-settings</v-icon>Logout
+                    </v-btn>
+                </router-link>
+
+
+            </v-app-bar>
+        </v-app>
     </div>
-
-
 </template>
 
 <script>
@@ -68,6 +92,14 @@ import {HalfCircleSpinner} from 'epic-spinners'
                 showDescription:false,
                 showAnimation: false,
                 postClicked: false
+            }
+        },
+        created() {
+            if (sessionStorage.getItem("IDuser") === null) {
+                console.log("No login");
+                this.$router.push("/posts")
+            }else{
+                console.log("Login feito")
             }
         },
         methods:{
@@ -93,8 +125,7 @@ import {HalfCircleSpinner} from 'epic-spinners'
                     }})
                 .then(res =>{
                     this.showAnimation = false;
-                    console.log(res);
-                    console.log("Link foto: " + res.data.data.link);
+
                     this.showDescription = true;
 
                     this.imageLink = res.data.data.link;
@@ -105,13 +136,12 @@ import {HalfCircleSpinner} from 'epic-spinners'
                 })
             },
             newPost(){
-                console.log("Description: " + this.description);
-                console.log("image link: " +  this.imageLink);
+
                 const url = "http://localhost:3000/api/inserePost";
                 var dados = {
                     postimage : this.imageLink,
                     description: this.description
-                }
+                };
                 axios.post(url,dados
                 ).then(response=>{
                     console.log("Post insirido BD");
@@ -120,6 +150,11 @@ import {HalfCircleSpinner} from 'epic-spinners'
                 }).catch(error=>{
                     console.log("Erro insirir BD: " + error);
                 })
+            },
+            logout(){
+                console.log("Logout btn pressed");
+                sessionStorage.removeItem("IDuser");
+                this.$router.push("/posts");
             }
         }
     }

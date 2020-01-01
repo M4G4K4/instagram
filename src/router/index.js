@@ -55,6 +55,16 @@ const routes = [
     path: '/posts',
     name: 'Posts',
     component: () => import('../components/Posts')
+  },
+  {
+    path: '/perfil',
+    name: 'Perfil',
+    component: () => import('../components/Perfil')
+  },
+  {
+    path: '/userimage',
+    name: 'Change Image',
+    component: () => import('../components/UploadImage')
   }
 ];
 

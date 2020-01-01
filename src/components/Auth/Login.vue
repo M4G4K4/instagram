@@ -49,28 +49,61 @@
 
 <script>
 
+    import axios from "axios";
+    import passwordHash from "password-hash";
+
     export default {
         name: "Login",
         data: () => ({
             email: "",
             password: "",
-            error: false
+            error: false,
         }),
         methods:{
             loginUser(){
+                console.log("sasds");
+                let dados = {
+                    email: this.email,
+                    password: this.password
+                };
 
+                axios.post('verifyUser',dados)
+                    .then(({data,status}) =>{
+                        if(status === 200){
+                            if(passwordHash.verify(dados.password,data.response[0].password)){
+                                console.log("Login success");
+                                console.log("User: " + data.response[0].IDuser);
+                                sessionStorage.setItem("IDuser", data.response[0].IDuser);
+                                this.$router.push("/posts");
+                            }else{
+                                console.log("Password errada");
+                            }
+                        }
+                        else{
+                            console.log("Login Erro");
+                        }
+                    })
+                    .catch(error =>{
+                        console.log("Error: " + error);
+                    })
+
+
+                /*
                 this.$store.dispatch("LOGIN",{
                     email: this.email,
                     password: this.password
                 })
                     .then(({status})=>{
                         console.log("Sucesso Login");
-                        this.$router.push("/dashboard");
+                        console.log(status);
+                        //this.$router.push("/dashboard");
                     })
                 .catch(error=>{
                     this.error = true;
                     console.log("Erro login : " + error);
                 })
+
+                */
             }
         }
     }

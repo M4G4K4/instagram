@@ -25,6 +25,64 @@
                 </v-img>
             </v-card>
         </div>
+
+
+        <v-app>
+            <v-app-bar
+                    app
+                    color="primary"
+                    dark
+            >
+                <router-link to="/posts">
+                    <v-avatar :tile="true">
+                        <img src="https://image.flaticon.com/icons/png/512/87/87390.png" alt="logo">
+                    </v-avatar>
+                </router-link>
+
+                <v-spacer/>
+
+                <div v-if="logado">
+                    <router-link to="/perfil">
+                        <v-btn  class="ma-2" title outlined color="white" >
+                            <v-icon left >mdi-home</v-icon>Perfil
+                        </v-btn>
+                    </router-link>
+                </div>
+
+                <div v-if="logado">
+                    <router-link to="/dashboard">
+                        <v-btn class="ma-2" title outlined color="white" >
+                            <v-icon left >mdi-settings</v-icon>New Post
+                        </v-btn>
+                    </router-link>
+                </div>
+
+                <div v-if="logado">
+                    <router-link to="/posts">
+                        <v-btn class="ma-2" title outlined color="white" @click.prevent="logout()">
+                            <v-icon left >mdi-settings</v-icon>Logout
+                        </v-btn>
+                    </router-link>
+                </div>
+
+                <div v-if="!logado">
+                    <router-link to="/login">
+                        <v-btn class="ma-2" title outlined color="white" >
+                            <v-icon left >mdi-settings</v-icon>Login
+                        </v-btn>
+                    </router-link>
+                </div>
+
+                <div v-if="!logado">
+                    <router-link to="/signup">
+                        <v-btn class="ma-2" title outlined color="white" >
+                            <v-icon left >mdi-settings</v-icon>Sign Up
+                        </v-btn>
+                    </router-link>
+                </div>
+
+            </v-app-bar>
+        </v-app>
     </div>
 </template>
 
@@ -33,37 +91,47 @@
     export default {
         name: "Posts",
         data: () => ({
-            posts:[]
+            posts:[],
+            logado:false
         }),
-        methods:{
-            async getPosts(){
-                console.log("getPosts() got called")
-                //this.$store.dispatch("getPosts")
-                const url = "http://localhost:3000/api/getAllPosts"
-                await axios.get(url)
-                    .then(response=>{
-                        this.posts = response.data.results;
-                        console.log("Before: ");
-                        console.log(this.posts);
-                        // Se user não tem imagem vai ser colocada uma default
-                        var i = 0;
-                        for (i = 0; i < this.posts.length; i++) {
-                           if(this.posts.userimage === null || this.posts.userimage === "" || this.posts.userimage === undefined ){
-                               console.log("IF acontece");
-                               this.posts[i].userimage = "https://i.imgur.com/23kxlWn.png";
-                           }
-                        }
-                        console.log("After: ");
-                        console.log(this.posts);
-
-                    })
-                    .catch(error =>{
-                        console.log("Error Posts: " + error)
-                    })
+        created() {
+            if (sessionStorage.getItem("IDuser") === null) {
+                console.log("No login");
+            }else{
+                console.log("Login feito")
+                this.logado = true;
             }
         },
         mounted: function () {
             this.getPosts()
+        },
+        methods:{
+            async getPosts(){
+
+                const url = "http://localhost:3000/api/getAllPosts"
+                await axios.get(url)
+                    .then(response=>{
+                        this.posts = response.data.results;
+
+                        // Se user não tem imagem vai ser colocada uma default
+                        var i = 0;
+                        for (i = 0; i < this.posts.length; i++) {
+                           if(this.posts.userimage === null || this.posts.userimage === "" || this.posts.userimage === undefined ){
+                               this.posts[i].userimage = "https://i.imgur.com/23kxlWn.png";
+                           }
+                        }
+                    })
+                    .catch(error =>{
+                        console.log("Error Posts: " + error)
+                    })
+            }, // END GET POSTS
+            logout(){
+                console.log("Logout btn pressed");
+                this.logado = false;
+                sessionStorage.removeItem("IDuser");
+            }
+
+
         }
     }
 </script>

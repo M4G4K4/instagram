@@ -1,9 +1,7 @@
 <template>
     <div>
-        <v-btn :color="Color" @click="Increment()" >{{Text}}</v-btn>
+        <v-btn :color="Color" @click="new Increment()" >{{Text}}</v-btn>
 
-
-        <!-- <h3>{{Counter}}</h3> -->
 
         <div v-html="PrintCounter" ></div>
 

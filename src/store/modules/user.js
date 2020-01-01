@@ -8,16 +8,14 @@ export default {
     actions: {
         LOGIN: ({commit},payload) =>{
             return new Promise((resolve,reject) =>{
-                console.log("Payload Email: " + payload.email);
-                console.log("Payload Password: " + payload.password);
-
 
                 axios.post('verifyUser',payload)
                     .then(({data,status}) =>{
                         if(status === 200){
                             if(passwordHash.verify(payload.password,data.response[0].password)){
-                                console.log("Login Sucessssssssssss");
-                                resolve(true);
+                                console.log("Login sucess");
+                                console.log(data.response[0].IDuser);
+                                resolve(true,data.response[0].IDuser);
                             }else{
                                 resolve(false);
                             }
