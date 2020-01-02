@@ -8,6 +8,7 @@ import axios from 'axios';
 import passwordHash from 'password-hash';
 import Vuex from 'vuex';
 
+
 Vue.config.productionTip = false;
 Vue.prototype.$http = axios;
 const token = localStorage.getItem('token');

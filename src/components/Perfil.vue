@@ -4,13 +4,13 @@
         <div class="Header">
             <!-- @click="imageClicked()  -->
             <v-avatar class="avatar" @click.stop="dialog = true" :key="forcerender"
-                    size="140"
+                      size="140"
             >
                 <img
                         :src="this.posts[0].userimage"
                 >
             </v-avatar>
-                <p style="font-size: 40px" >{{this.posts[0].username}}</p>
+            <p style="font-size: 40px" >{{this.posts[0].username}}</p>
         </div>
 
         <!-- Pop up image upload-->
@@ -46,25 +46,17 @@
 
 
         <!-- POSTS -->
-        <!--
+
          <div class="posts grid">
              <div v-for="post in this.posts" class="posts">
                  <v-card
-                         height="800"
-                         width="500"
+
                          class="mx-auto"
                  >
-                     <v-list-item>
-                         <v-list-item-avatar >
-                             <v-img
-                                     :src="post.userimage"
-                             />
-                         </v-list-item-avatar>
-                         <v-list-item-content>
-                             <v-list-item-title style="display: flex" class="headline">{{post.username}}</v-list-item-title>
-                         </v-list-item-content>
-                     </v-list-item>
                      <v-img
+                             height="800"
+                             width="500"
+                             class="white--text align-end"
                              :src="post.postimage"
                      >
                          <v-card-title>{{post.description}}</v-card-title>
@@ -72,7 +64,7 @@
                  </v-card>
              </div>
         </div>
-        -->
+
 
 
 
@@ -113,9 +105,7 @@
 
 <script>
     import axios from "axios";
-
     export default {
-
         name: "Perfil",
         data: () => ({
             posts:[],
@@ -144,24 +134,19 @@
                 this.selectedFile = event.target.files[0];
                 this.imageName = this.selectedFile.name;
                 this.imageSelected = true;
-
             },
             logout(){
-
                 this.logado = false;
                 sessionStorage.removeItem("IDuser");
                 this.$router.push("/posts");
             },
             async getPosts(){
                 const url = "http://localhost:3000/api/getAllPostsByUser" + "?" + "IDuser=" + sessionStorage.getItem("IDuser");
-
                 await axios.get(url)
                     .then(response=>{
                         this.posts = response.data.results;
                         console.log(this.posts);
-
                         var i = 0;
-
                         for (i = 0; i < this.posts.length; i++) {
                             if(this.posts[i].userimage === null || this.posts[i].userimage === "" || this.posts[i].userimage === undefined ){
                                 this.posts[i].userimage = "https://i.imgur.com/23kxlWn.png";
@@ -178,10 +163,8 @@
             async upload(){
                 const fd = new FormData();
                 fd.append('image',this.selectedFile, this.selectedFile.name);
-
                 const url = "https://api.imgur.com/3/image";
                 const ClientID = "11a345230020f89";
-
                 await axios.post(url,fd,{ headers: { Authorization: `Client-ID ${ClientID}`} ,onUploadProgress: uploadEvent =>{
                         this.showAnimation = true;
                         console.log("Upload progress: " +  Math.round(uploadEvent.loaded / uploadEvent.total * 100) + "%" );
@@ -206,33 +189,26 @@
                 ).then(response=>{
                     console.log("Put insirido BD");
                     this.dialog = false;
-
                     location.reload(); // reload pagina
                 }).catch(error=>{
                     console.log("Erro insirir BD: " + error);
                 })
-
             }
         }
     }
 </script>
 
 <style lang="css" scoped>
-
     .posts{
         margin-bottom: 70px;
         padding-right: 35px;
     }
-
     .grid {
         display: grid;
         grid-gap: 1px;
         grid-template-columns: repeat(3, 1fr);
     }
-
     .avatar{
         cursor: pointer;
     }
-
-
 </style>
