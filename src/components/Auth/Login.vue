@@ -4,7 +4,7 @@
             <v-flex xs12 sm8 md8>
                 <v-form>
                     <v-card class="elevation-12">
-                        <v-toolbar dark color="blue">
+                        <v-toolbar dark color="black">
                             <v-toolbar-title>Login Form</v-toolbar-title>
                         </v-toolbar>
                         <v-alert
@@ -16,28 +16,30 @@
                         </v-alert>
                         <v-card-text>
                             <v-text-field
-                                    prepend-icon="person"
+                                    prepend-icon="mdi-account"
                                     name="email"
                                     label="Email"
                                     type="text"
+                                    required
                                     v-model="email"
                             />
 
                             <v-text-field
-                                    prepend-icon="lock"
+                                    prepend-icon="mdi-textbox-password"
                                     name="password"
                                     label="Password"
                                     type="password"
+                                    required
                                     v-model="password"
                             />
                         </v-card-text>
                         <v-divider/>
                         <v-card-actions>
-                            <v-btn  to="/signup" dark rounded color="indigo">Sign up</v-btn>
+                            <v-btn  to="/signup" light rounded color="white">Sign up</v-btn>
                             <v-spacer/>
-                            <v-btn  dark rounded color="primary" @click.prevent="loginUser()" >
+                            <v-btn  dark rounded color="black" @click.prevent="loginUser()" >
                                 Login
-                                <v-icon>mdi-arrow-right</v-icon>
+                                <v-icon>mdi-login</v-icon>
                             </v-btn>
                         </v-card-actions>
                     </v-card>
@@ -61,7 +63,6 @@
         }),
         methods:{
             loginUser(){
-                console.log("sasds");
                 let dados = {
                     email: this.email,
                     password: this.password
@@ -87,23 +88,6 @@
                         console.log("Error: " + error);
                     })
 
-
-                /*
-                this.$store.dispatch("LOGIN",{
-                    email: this.email,
-                    password: this.password
-                })
-                    .then(({status})=>{
-                        console.log("Sucesso Login");
-                        console.log(status);
-                        //this.$router.push("/dashboard");
-                    })
-                .catch(error=>{
-                    this.error = true;
-                    console.log("Erro login : " + error);
-                })
-
-                */
             }
         }
     }
@@ -111,5 +95,5 @@
 </script>
 
 <style scoped>
-
+    a {  text-decoration: none;}
 </style>

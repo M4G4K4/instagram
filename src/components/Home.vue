@@ -3,7 +3,7 @@
         <v-app>
             <v-app-bar
                     app
-                    color="primary"
+                    color="white"
                     dark
             >
                 <router-link to="/posts">
@@ -27,6 +27,9 @@
         name: 'Home',
         components: {
 
+        },
+        created() {
+           this.$router.push("/posts")
         },
     };
 </script>

@@ -30,7 +30,7 @@
         <v-app>
             <v-app-bar
                     app
-                    color="primary"
+                    color="white"
                     dark
             >
                 <router-link to="/posts">
@@ -43,31 +43,31 @@
 
                 <div v-if="logado">
                     <router-link to="/perfil">
-                        <v-btn  class="ma-2" title outlined color="white" >
-                            <v-icon left >mdi-home</v-icon>Perfil
+                        <v-btn  class="ma-2" title outlined color="black" >
+                            <v-icon left >mdi-account</v-icon>Perfil
                         </v-btn>
                     </router-link>
                 </div>
 
                 <div v-if="logado">
                     <router-link to="/dashboard">
-                        <v-btn class="ma-2" title outlined color="white" >
-                            <v-icon left >mdi-settings</v-icon>New Post
+                        <v-btn class="ma-2" title outlined color="black" >
+                            <v-icon left >mdi-plus</v-icon>New Post
                         </v-btn>
                     </router-link>
                 </div>
 
                 <div v-if="logado">
                     <router-link to="/posts">
-                        <v-btn class="ma-2" title outlined color="white" @click.prevent="logout()">
-                            <v-icon left >mdi-settings</v-icon>Logout
+                        <v-btn class="ma-2" title outlined color="black" @click.prevent="logout()">
+                            <v-icon left >mdi-logout</v-icon>Logout
                         </v-btn>
                     </router-link>
                 </div>
 
                 <div v-if="!logado">
                     <router-link to="/login">
-                        <v-btn class="ma-2" title outlined color="white" >
+                        <v-btn class="ma-2" title outlined color="black" >
                             <v-icon left >mdi-settings</v-icon>Login
                         </v-btn>
                     </router-link>
@@ -75,7 +75,7 @@
 
                 <div v-if="!logado">
                     <router-link to="/signup">
-                        <v-btn class="ma-2" title outlined color="white" >
+                        <v-btn class="ma-2" title outlined color="black" >
                             <v-icon left >mdi-settings</v-icon>Sign Up
                         </v-btn>
                     </router-link>
@@ -107,19 +107,17 @@
         },
         methods:{
             async getPosts(){
-
                 const url = "http://localhost:3000/api/getAllPosts"
                 await axios.get(url)
                     .then(response=>{
                         this.posts = response.data.results;
-
                         // Se user não tem imagem vai ser colocada uma default
                         var i = 0;
                         console.log("Nº posts: " + this.posts.length);
                         for (i = 0; i < this.posts.length; i++) {
-                           if(this.posts[i].userimage === null || this.posts[i].userimage === "" || this.posts[i].userimage === undefined){
-                               this.posts[i].userimage = "https://i.imgur.com/23kxlWn.png";
-                           }
+                            if(this.posts[i].userimage === null || this.posts[i].userimage === "" || this.posts[i].userimage === undefined){
+                                this.posts[i].userimage = "https://i.imgur.com/23kxlWn.png";
+                            }
                         }
                     })
                     .catch(error =>{
@@ -131,8 +129,6 @@
                 this.logado = false;
                 sessionStorage.removeItem("IDuser");
             }
-
-
         }
     }
 </script>
@@ -141,4 +137,6 @@
     .posts{
         padding-bottom: 750px;
     }
+
+    a {  text-decoration: none;}
 </style>

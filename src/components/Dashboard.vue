@@ -6,14 +6,14 @@
         <br>
         <div class="upload">
             <input style="display: none" type="file" @change="onFileSelected" ref="fileInput" >
-            <v-btn @click="$refs.fileInput.click()">Pick a File</v-btn>
+            <v-btn color="success" @click="$refs.fileInput.click()">Pick a File</v-btn>
             <p>{{this.imageName}}</p>
 
 
-            <v-btn v-if="imageSelected" @click="onUpload" >Upload       {{this.percentage}}</v-btn>
+            <v-btn color="success" v-if="imageSelected" @click="onUpload" >Upload       {{this.percentage}}</v-btn>
             <br>
             <br>
-            <div v-if="showAnimation" id="app" style="display: flex">
+            <div v-if="showAnimation" id="app" style="display: flex;padding-left: 35px">
                 <half-circle-spinner
                         :animation-duration="1000"
                         :size="60"
@@ -24,27 +24,24 @@
         </div>
 
         <div class="description" v-if="this.showDescription">
-
             <v-text-field
-                    prepend-icon="person"
+                    prepend-icon="mdi-account"
                     name="description"
                     label="Description"
                     type="text"
                     v-model="description"
             >
-
             </v-text-field>
 
             <div class="post">
-                <v-btn @click="newPost()" >Post</v-btn>
+                <v-btn color="success" @click="newPost()" >Post</v-btn>
             </div>
-
         </div>
 
         <v-app>
             <v-app-bar
                     app
-                    color="primary"
+                    color="white"
                     dark
             >
                 <router-link to="/posts">
@@ -56,14 +53,14 @@
                 <v-spacer/>
 
                 <router-link to="/perfil">
-                    <v-btn class="ma-2" title outlined color="white" >
-                        <v-icon left >mdi-settings</v-icon>Perfil
+                    <v-btn class="ma-2" title outlined color="black" >
+                        <v-icon left >mdi-account</v-icon>Perfil
                     </v-btn>
                 </router-link>
 
                 <router-link to="/posts">
-                    <v-btn class="ma-2" title outlined color="white" @click.prevent="logout()">
-                        <v-icon left >mdi-settings</v-icon>Logout
+                    <v-btn class="ma-2" title outlined color="black" @click.prevent="logout()">
+                        <v-icon left >mdi-logout</v-icon>Logout
                     </v-btn>
                 </router-link>
 
@@ -163,5 +160,5 @@ import {HalfCircleSpinner} from 'epic-spinners'
 </script>
 
 <style scoped>
-
+    a {  text-decoration: none;}
 </style>

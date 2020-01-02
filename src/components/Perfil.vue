@@ -44,9 +44,7 @@
             </v-row>
         </div>
 
-
         <!-- POSTS -->
-
          <div class="posts grid">
              <div v-for="post in this.posts" class="posts">
                  <v-card
@@ -65,13 +63,10 @@
              </div>
         </div>
 
-
-
-
         <v-app>
             <v-app-bar
                     app
-                    color="primary"
+                    color="white"
                     dark
             >
                 <router-link to="/posts">
@@ -84,16 +79,16 @@
 
                 <div >
                     <router-link to="/dashboard">
-                        <v-btn class="ma-2" title outlined color="white" >
-                            <v-icon left >mdi-settings</v-icon>New Post
+                        <v-btn class="ma-2" title outlined color="black" >
+                            <v-icon left >mdi-plus</v-icon>New Post
                         </v-btn>
                     </router-link>
                 </div>
 
                 <div >
                     <router-link to="/posts">
-                        <v-btn class="ma-2" title outlined color="white" @click.prevent="logout()">
-                            <v-icon left >mdi-settings</v-icon>Logout
+                        <v-btn class="ma-2" title outlined color="black" @click.prevent="logout()">
+                            <v-icon left >mdi-logout</v-icon>Logout
                         </v-btn>
                     </router-link>
                 </div>
@@ -211,4 +206,6 @@
     .avatar{
         cursor: pointer;
     }
+
+    a {  text-decoration: none;}
 </style>
