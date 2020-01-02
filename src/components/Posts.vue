@@ -117,7 +117,7 @@
                         var i = 0;
                         console.log("Nº posts: " + this.posts.length);
                         for (i = 0; i < this.posts.length; i++) {
-                           if(this.posts.userimage === null || this.posts.userimage === "" || this.posts.userimage === undefined ){
+                           if(this.posts[i].userimage === null || this.posts[i].userimage === "" || this.posts[i].userimage === undefined){
                                this.posts[i].userimage = "https://i.imgur.com/23kxlWn.png";
                            }
                         }
