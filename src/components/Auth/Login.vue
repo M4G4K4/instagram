@@ -10,9 +10,9 @@
                         <v-alert
                             color="error"
                             :value="error"
-                            icon="close"
+                            icon="mdi-alert"
                         >
-                            The username or password are wrong
+                            The email or password are incorrect!
                         </v-alert>
                         <v-card-text>
                             <v-text-field
@@ -20,7 +20,7 @@
                                     name="email"
                                     label="Email"
                                     type="text"
-                                    required
+                                    :rules="[rules.required,rules.email]"
                                     v-model="email"
                             />
 
@@ -29,7 +29,7 @@
                                     name="password"
                                     label="Password"
                                     type="password"
-                                    required
+                                    :rules="[rules.required]"
                                     v-model="password"
                             />
                         </v-card-text>
@@ -60,6 +60,13 @@
             email: "",
             password: "",
             error: false,
+            rules:{
+                required: value => !!value || "Required",
+                email: value =>{
+                    const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                    return pattern.test(value) || 'Invalid e-mail.';
+                }
+            }
         }),
         methods:{
             loginUser(){
@@ -81,6 +88,7 @@
                             }
                         }
                         else{
+                            this.error = true;
                             console.log("Login Erro");
                         }
                     })

@@ -4,6 +4,8 @@
         <h1>New Post</h1>
         <br>
         <br>
+
+
         <div class="upload">
             <input style="display: none" type="file" @change="onFileSelected" ref="fileInput" >
             <v-btn color="success" @click="$refs.fileInput.click()">Pick a File</v-btn>

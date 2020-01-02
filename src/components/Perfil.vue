@@ -27,14 +27,21 @@
 
                         <br>
                         <br>
-                        <div  >
+                        <div >
                             <input style="display: none" type="file" @change="onFileSelected" ref="fileInput" >
-                            <v-btn style="margin-left: 200px;" @click="$refs.fileInput.click()">Pick a photo</v-btn>
-                            <br>
-                            <br>
+                            <v-btn color="success" style="margin-left: 200px;" @click="$refs.fileInput.click()">Pick a photo</v-btn>
+                            <br> <br>
                             <p v-if="imageSelected" style="margin-left: 220px" >Photo: {{this.imageName}}</p>
                             <br>
-                            <v-btn  style="margin-left: 185px" class="dialogChange" v-if="imageSelected" @click="upload" >Change Image</v-btn>
+                            <v-btn color="success" style="margin-left: 185px" class="dialogChange" v-if="imageSelected" @click="upload" >Change Image {{this.percentage}}</v-btn>
+                            <br><br>
+                            <div v-if="showAnimation" id="app" style="padding-left: 250px">
+                                <half-circle-spinner
+                                        :animation-duration="1000"
+                                        :size="60"
+                                        :color="'#ff1d5e'"
+                                />
+                            </div>
                         </div>
                         <br>
                         <br>
@@ -48,7 +55,6 @@
          <div class="posts grid">
              <div v-for="post in this.posts" class="posts">
                  <v-card
-
                          class="mx-auto"
                  >
                      <v-img
@@ -100,8 +106,13 @@
 
 <script>
     import axios from "axios";
+    import {HalfCircleSpinner} from 'epic-spinners'
+
     export default {
         name: "Perfil",
+        components: {
+            HalfCircleSpinner
+        },
         data: () => ({
             posts:[],
             logado:false,
@@ -111,7 +122,8 @@
             percentage:"",
             imageLink:"",
             dialog:"",
-            forcerender:1
+            forcerender:1,
+            showAnimation: false
         }),
         created() {
             if (sessionStorage.getItem("IDuser") === null) {
@@ -156,6 +168,7 @@
                 this.userimageClicked = true;
             },
             async upload(){
+                this.showAnimation = true;
                 const fd = new FormData();
                 fd.append('image',this.selectedFile, this.selectedFile.name);
                 const url = "https://api.imgur.com/3/image";
@@ -182,7 +195,8 @@
                 };
                 await axios.put(url,dados
                 ).then(response=>{
-                    console.log("Put insirido BD");
+                    console.log("User image changed");
+                    this.showAnimation = false;
                     this.dialog = false;
                     location.reload(); // reload pagina
                 }).catch(error=>{

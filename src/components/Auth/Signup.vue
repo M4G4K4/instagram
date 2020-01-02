@@ -12,7 +12,7 @@
                             <v-alert
                                 :value="userExists"
                                 color="error"
-                                icon="warning"
+                                icon="mdi-alert"
                             >
                                 This user already exists...
                             </v-alert>
