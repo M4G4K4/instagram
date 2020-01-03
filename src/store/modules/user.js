@@ -6,9 +6,9 @@ export default {
     getters: {},
     mutations: {},
     actions: {
+        // Login não foi usado porque precisava de returnar dados e não o consegui fazer com isto
         LOGIN: ({commit},payload) =>{
             return new Promise((resolve,reject) =>{
-
                 axios.post('verifyUser',payload)
                     .then(({data,status}) =>{
                         if(status === 200){
