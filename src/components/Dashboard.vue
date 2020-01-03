@@ -149,7 +149,6 @@ import {HalfCircleSpinner} from 'epic-spinners'
                 })
             },
             logout(){
-
                 sessionStorage.removeItem("IDuser");
                 this.$router.push("/posts");
             }
