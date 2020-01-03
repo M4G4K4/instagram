@@ -4,13 +4,10 @@
         <h1>New Post</h1>
         <br>
         <br>
-
-
         <div class="upload">
             <input style="display: none" type="file" @change="onFileSelected" ref="fileInput" >
             <v-btn color="success" @click="$refs.fileInput.click()">Pick a File</v-btn>
             <p>{{this.imageName}}</p>
-
 
             <v-btn color="success" v-if="imageSelected" @click="onUpload" >Upload       {{this.percentage}}</v-btn>
             <br>
@@ -91,15 +88,15 @@ import {HalfCircleSpinner} from 'epic-spinners'
                 imageSelected:false,
                 showDescription:false,
                 showAnimation: false,
-                postClicked: false
+                postClicked: false,
             }
         },
         created() {
             if (sessionStorage.getItem("IDuser") === null) {
-                console.log("No login");
+
                 this.$router.push("/posts")
             }else{
-                console.log("Login feito")
+
             }
         },
         methods:{
@@ -120,7 +117,7 @@ import {HalfCircleSpinner} from 'epic-spinners'
 
                 await   axios.post(url,fd,{ headers: { Authorization: `Client-ID ${ClientID}`} ,onUploadProgress: uploadEvent =>{
                     this.showAnimation = true;
-                    console.log("Upload progress: " +  Math.round(uploadEvent.loaded / uploadEvent.total * 100) + "%" );
+
                     this.percentage = Math.round(uploadEvent.loaded / uploadEvent.total * 100) + "%";
                     }})
                 .then(res =>{
@@ -145,15 +142,14 @@ import {HalfCircleSpinner} from 'epic-spinners'
                 };
                 axios.post(url,dados
                 ).then(response=>{
-                    console.log("Post insirido BD");
-                    console.log(response);
+
                     this.$router.push("/posts");
                 }).catch(error=>{
                     console.log("Erro insirir BD: " + error);
                 })
             },
             logout(){
-                console.log("Logout btn pressed");
+
                 sessionStorage.removeItem("IDuser");
                 this.$router.push("/posts");
             }
@@ -162,5 +158,6 @@ import {HalfCircleSpinner} from 'epic-spinners'
 </script>
 
 <style scoped>
+
     a {  text-decoration: none;}
 </style>

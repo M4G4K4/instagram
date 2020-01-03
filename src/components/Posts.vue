@@ -96,9 +96,9 @@
         }),
         created() {
             if (sessionStorage.getItem("IDuser") === null) {
-                console.log("No login");
+
             }else{
-                console.log("Login feito")
+
                 this.logado = true;
             }
         },
