@@ -2,8 +2,7 @@
     <div>
         <div v-for="post in this.posts" class="posts">
             <v-card
-                    max-width="800"
-                    max-height="1000"
+
                     class="mx-auto"
             >
                 <v-list-item>
@@ -17,8 +16,9 @@
                     </v-list-item-content>
                 </v-list-item>
                 <v-img
+                        height="800"
+                        width="500"
                         class="white--text align-end"
-                        max-width="800"
                         :src="post.postimage"
                 >
                     <v-card-title>{{post.description}}</v-card-title>
@@ -135,7 +135,7 @@
 
 <style scoped>
     .posts{
-        padding-bottom: 750px;
+        padding-bottom: 100px;
     }
 
     a {  text-decoration: none;}
