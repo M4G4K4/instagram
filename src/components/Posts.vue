@@ -107,13 +107,13 @@
         },
         methods:{
             async getPosts(){
-                const url = "http://localhost:3000/api/getAllPosts"
+                const url = "http://localhost:3000/api/getAllPosts";
                 await axios.get(url)
                     .then(response=>{
                         this.posts = response.data.results;
                         // Se user não tem imagem vai ser colocada uma default
-                        var i = 0;
-                        console.log("Nº posts: " + this.posts.length);
+                        var i;
+
                         for (i = 0; i < this.posts.length; i++) {
                             if(this.posts[i].userimage === null || this.posts[i].userimage === "" || this.posts[i].userimage === undefined){
                                 this.posts[i].userimage = "https://i.imgur.com/23kxlWn.png";
