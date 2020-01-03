@@ -1,4 +1,4 @@
-# vue1manual
+# Instagram
 
 ## Project setup
 ```
