@@ -68,7 +68,7 @@
                 <div v-if="!logado">
                     <router-link to="/login">
                         <v-btn class="ma-2" title outlined color="black" >
-                            <v-icon left >mdi-settings</v-icon>Login
+                            <v-icon left >mdi-login</v-icon>Login
                         </v-btn>
                     </router-link>
                 </div>
@@ -76,7 +76,7 @@
                 <div v-if="!logado">
                     <router-link to="/signup">
                         <v-btn class="ma-2" title outlined color="black" >
-                            <v-icon left >mdi-settings</v-icon>Sign Up
+                            <v-icon left >mdi-account-plus</v-icon>Sign Up
                         </v-btn>
                     </router-link>
                 </div>
