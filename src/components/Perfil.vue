@@ -8,6 +8,7 @@
             >
                 <img
                         :src="this.posts[0].userimage"
+                        alt="user image"
                 >
             </v-avatar>
             <p style="font-size: 40px" >{{this.posts[0].username}}</p>
@@ -127,10 +128,9 @@
         }),
         created() {
             if (sessionStorage.getItem("IDuser") === null) {
-                console.log("No login");
                 this.$router.push("/posts")
             }else{
-                console.log("Login feito")
+               // login feito
             }
         },
         mounted: function () {
@@ -152,8 +152,8 @@
                 await axios.get(url)
                     .then(response=>{
                         this.posts = response.data.results;
-                        console.log(this.posts);
-                        var i = 0;
+
+                        var i;
                         for (i = 0; i < this.posts.length; i++) {
                             if(this.posts[i].userimage === null || this.posts[i].userimage === "" || this.posts[i].userimage === undefined ){
                                 this.posts[i].userimage = "https://i.imgur.com/23kxlWn.png";
@@ -187,7 +187,7 @@
                     })
             },
             async changeUserImage(){
-                console.log("Change USer image function called");
+
                 const url = "http://localhost:3000/api/insereUserImage";
                 var dados = {
                     userimage:this.imageLink,
@@ -195,7 +195,6 @@
                 };
                 await axios.put(url,dados
                 ).then(response=>{
-                    console.log("User image changed");
                     this.showAnimation = false;
                     this.dialog = false;
                     location.reload(); // reload pagina

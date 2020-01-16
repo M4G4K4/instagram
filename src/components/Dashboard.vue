@@ -157,6 +157,5 @@ import {HalfCircleSpinner} from 'epic-spinners'
 </script>
 
 <style scoped>
-
     a {  text-decoration: none;}
 </style>

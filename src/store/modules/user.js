@@ -42,11 +42,9 @@ export default {
                 axios.post('registerUser',{username,nome,email,password})
                     .then(({data,status}) =>{
                         if(status === 201){
-                            //console.log("Sucess");
                             resolve(true);
                         }
                         else{
-                            //console.log("Erro");
                             resolve(false);
                         }
                     })

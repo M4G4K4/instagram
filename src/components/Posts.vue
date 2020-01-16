@@ -125,7 +125,7 @@
                     })
             }, // END GET POSTS
             logout(){
-                console.log("Logout btn pressed");
+
                 this.logado = false;
                 sessionStorage.removeItem("IDuser");
             }

@@ -75,7 +75,7 @@
 
                         </v-form>
 
-                        <v-divider lignt ></v-divider>
+
 
                         <v-card-actions>
                             <v-btn to="/login" light rounded color="white" >Login
@@ -115,12 +115,9 @@
           }
         }),
         methods:{
-
             register(){
-
                 // Script enciptar password
                 var hashedPassword = passwordHash.generate(this.password);
-                console.log("Hashed pass: " + hashedPassword);
 
                 if(this.valid()){
                     this.$store.dispatch('REGISTER',{
@@ -130,7 +127,7 @@
                         password: hashedPassword
                     })
                     .then(({status})=>{
-                        console.log("User criado");
+
                         this.$router.push("/login");
                     })
                     .catch(error =>{
@@ -138,7 +135,6 @@
                         console.log("Sign up error: " + error);
                     })
                 }
-
             },
             valid(){
                 return this.password === this.confirmPassword;

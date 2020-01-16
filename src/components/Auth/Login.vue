@@ -50,7 +50,6 @@
 </template>
 
 <script>
-
     import axios from "axios";
     import passwordHash from "password-hash";
 
@@ -79,8 +78,7 @@
                     .then(({data,status}) =>{
                         if(status === 200){
                             if(passwordHash.verify(dados.password,data.response[0].password)){
-                                console.log("Login success");
-                                console.log("User: " + data.response[0].IDuser);
+
                                 sessionStorage.setItem("IDuser", data.response[0].IDuser);
                                 this.$router.push("/posts");
                             }else{
