@@ -34,10 +34,6 @@ export default {
         },
         REGISTER: ({commit},{username,nome,email,password}) =>{
             return new Promise((resolve,reject) =>{
-                console.log("Email: " + email);
-                console.log("Password: " + password);
-                console.log("Nome: " + nome);
-                console.log("Username: " + username);
 
                 axios.post('registerUser',{username,nome,email,password})
                     .then(({data,status}) =>{
