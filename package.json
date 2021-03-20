@@ -22,7 +22,7 @@
     "vue": "^2.6.11",
     "vue-colcade": "^1.2.4",
     "vue-cover-gallery": "^1.0.7",
-    "vue-easy-lightbox": "^0.11.0",
+    "vue-easy-lightbox": "^0.14.1",
     "vue-gallery": "^2.0.1",
     "vue-gallery-slideshow": "^1.5.0",
     "vue-infinite-scroll": "^2.0.2",
