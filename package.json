@@ -28,7 +28,7 @@
     "vue-infinite-scroll": "^2.0.2",
     "vue-masonry": "^0.11.8",
     "vue-photo-grid": "^1.0.2",
-    "vue-pswipe": "^0.15.0",
+    "vue-pswipe": "^0.15.3",
     "vue-router": "^3.5.1",
     "vue-runtime-helpers": "^1.1.2",
     "vue-stack-grid": "^1.2.1",
