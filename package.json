@@ -42,7 +42,7 @@
     "@vue/cli-plugin-router": "^4.5.12",
     "@vue/cli-plugin-vuex": "^4.4.6",
     "@vue/cli-service": "^4.5.12",
-    "sass": "^1.26.9",
+    "sass": "^1.32.8",
     "sass-loader": "^9.0.3",
     "vue-cli-plugin-vuetify": "^2.2.2",
     "vue-template-compiler": "^2.6.11",
