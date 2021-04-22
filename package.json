@@ -26,7 +26,7 @@
     "vue-gallery": "^2.0.1",
     "vue-gallery-slideshow": "^1.5.0",
     "vue-infinite-scroll": "^2.0.2",
-    "vue-masonry": "^0.11.8",
+    "vue-masonry": "^0.13.0",
     "vue-photo-grid": "^1.0.2",
     "vue-pswipe": "^0.15.0",
     "vue-router": "^3.5.1",
