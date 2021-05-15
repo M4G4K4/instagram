@@ -31,7 +31,7 @@
     "vue-pswipe": "^0.15.0",
     "vue-router": "^3.5.1",
     "vue-runtime-helpers": "^1.1.2",
-    "vue-stack-grid": "^1.2.1",
+    "vue-stack-grid": "^1.2.2",
     "vuetify": "^2.4.5",
     "vuex": "^3.5.1"
   },
